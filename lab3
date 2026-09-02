@@ -38,7 +38,15 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_3() {
 function main(k) {
-  
+  k.move();
+  if(k.beepersPresent()){
+    k.paintCorner("Red");
+  }
+  k.move();
+  k.move();
+  if(k.beepersPresent()){
+    k.paintCorner("Red");
+  }
 }
   return main;
 }
@@ -52,3 +60,4 @@ function main(k) {
 }
   return main;
 }
+
