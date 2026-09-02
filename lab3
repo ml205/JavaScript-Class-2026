@@ -55,6 +55,20 @@ function main(k) {
 // Problem 4: complex2 (Complex II)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
+ if (k.cornerColorIs("Red")) {
+    k.putBeeper();
+  }
+  
+   if (k.cornerColorIs("Orange")) {
+    k.putBeeper();
+    k.putBeeper();
+  }
+  
+   if (k.cornerColorIs("Blue")) {
+    k.putBeeper();
+    k.putBeeper();
+    k.putBeeper();
+  }
 function main(k) {
   
 }
