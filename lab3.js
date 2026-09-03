@@ -9,7 +9,7 @@
 // ──────────────────────────────────────────────────────────
 function problem_1() {
 function main(k) {
-  if (k.beepersPresent()) {
+    if (k.beepersPresent()) {
     k.pickBeeper();
   }
 }
@@ -21,7 +21,7 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_2() {
 function main(k) {
-  if (k.beepersPresent()) {
+   if (k.beepersPresent()) {
     k.pickBeeper();
   }
   k.move();
@@ -38,7 +38,7 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_3() {
 function main(k) {
-  k.move();
+    k.move();
   if(k.beepersPresent()){
     k.paintCorner("Red");
   }
@@ -55,23 +55,82 @@ function main(k) {
 // Problem 4: complex2 (Complex II)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
+ function red(k){
  if (k.cornerColorIs("Red")) {
     k.putBeeper();
   }
-  
-   if (k.cornerColorIs("Orange")) {
+}
+
+  function orange(k){
+  if (k.cornerColorIs("Orange")) {
     k.putBeeper();
     k.putBeeper();
   }
-  
+ } 
+ 
+  function blue(k){ 
    if (k.cornerColorIs("Blue")) {
     k.putBeeper();
     k.putBeeper();
     k.putBeeper();
   }
+}
+function color(k) {
+  blue(k);
+  orange(k);
+  red(k);
+}
+
+function steps(k){
+  color(k);
+  k.move();
+}
+
+function east(k){
+  color(k);
+  k.turnLeft();
+  k.move();
+  k.turnLeft();
+}
+
+function west(k){
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+  k.move();
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function row(k){
+  steps(k);
+  steps(k);
+  steps(k);
+  steps(k);
+  steps(k);
+  steps(k);
+  steps(k);
+}
+
+function work(k){
+  row(k);
+  east(k);
+  row(k);  
+  west(k);
+}
+
+function work1(k){
+  row(k);
+  east(k);
+  row(k); 
+}
+
 function main(k) {
-  
+  work(k);  
+  work(k); 
+  work(k); 
+  work1(k); 
 }
   return main;
 }
-
