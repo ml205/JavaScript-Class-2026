@@ -9,9 +9,7 @@
 // ──────────────────────────────────────────────────────────
 function problem_1() {
 function main(k) {
-  while (k.frontIsClear()) {
-    k.move();
-  }
+  
 }
   return main;
 }
@@ -21,11 +19,7 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_2() {
 function main(k) {
-  while (k.frontIsClear()) {
-    k.pickBeeper();
-    k.move();
-  }
-  k.pickBeeper();
+  
 }
   return main;
 }
@@ -45,9 +39,7 @@ function main(k) {
   while (k.beepersInBag()){
   k.putBeeper();
 }
-  k.turnLeft();
-  k.move();
-  k.turnLeft();
+  left(k);
  
   while (k.frontIsClear()) {
     k.move();
@@ -55,8 +47,7 @@ function main(k) {
   while (k.beepersPresent()) {
     k.pickBeeper();
   }
- k.turnLeft();
- k.turnLeft();
+ turnaround(k);
  
   while (k.frontIsClear()) {
     k.move();
@@ -64,14 +55,41 @@ function main(k) {
  while (k.beepersInBag()){
    k.putBeeper();
  }
- k.turnLeft();
-  k.move();
-  k.turnLeft();
-  
+ 
+ left(k);
+ 
  while (k.frontIsClear()) {
     k.move();
   }
 }
+function final(k){
+   while (k.beepersPresent()) {
+    k.pickBeeper()
+  }
+  while (k.frontIsClear()) {
+    k.move();
+  }
+  while (k.beepersInBag()){
+  k.putBeeper();
+}
+  left(k);
+ 
+  while (k.frontIsClear()) {
+    k.move();
+  }
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+  }
+ turnaround(k);
+ 
+  while (k.frontIsClear()) {
+    k.move();
+  }
+ while (k.beepersInBag()){
+   k.putBeeper();
+ }
+}
+
 function left(k){
   k.turnLeft();
   k.move();
@@ -87,7 +105,7 @@ function turnaround(k){
  turnaround(k);
  problem(k);
  turnaround(k);
- 
+ final(k);
 }
   return main;
 }
@@ -101,3 +119,4 @@ function main(k) {
 }
   return main;
 }
+
