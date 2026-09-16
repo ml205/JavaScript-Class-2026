@@ -62,6 +62,13 @@ function main(k) {
     leftthrice(k);
   }
   
+  function line(k) {
+    while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  }
+  
   k.turnLeft();
   
   while (k.frontIsClear()) {
@@ -72,39 +79,27 @@ function main(k) {
 }
   k.move();
   
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k);
   
   rightwall(k);
   k.move();
   k.move();
 
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k);
   
   k.move();
   leftwall(k);
   forward(k);
   k.move();
   
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k)
   
   forward(k);
   rightwall(k);
   forward(k);
   forward(k);
   
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k)
   
   forward(k);
   k.move();
@@ -112,28 +107,19 @@ function main(k) {
   forward(k);
   k.move();
   
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k);
   
   forward(k);
   rightwall(k);
   forward(k)
   
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k);
   
   k.move();
   leftwall(k);
   k.move();
   
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-    k.move();
-  }
+  line(k);
   
   k.turnLeft();
   k.move();
@@ -145,3 +131,4 @@ function main(k) {
 }
   return main;
 }
+
