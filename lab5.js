@@ -29,83 +29,7 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_3() {
 function main(k) {
- function problem(k) {
-  while (k.beepersPresent()) {
-    k.pickBeeper()
-  }
-  while (k.frontIsClear()) {
-    k.move();
-  }
-  while (k.beepersInBag()){
-  k.putBeeper();
-}
-  left(k);
- 
-  while (k.frontIsClear()) {
-    k.move();
-  }
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-  }
- turnaround(k);
- 
-  while (k.frontIsClear()) {
-    k.move();
-  }
- while (k.beepersInBag()){
-   k.putBeeper();
- }
- 
- left(k);
- 
- while (k.frontIsClear()) {
-    k.move();
-  }
-}
-function final(k){
-   while (k.beepersPresent()) {
-    k.pickBeeper()
-  }
-  while (k.frontIsClear()) {
-    k.move();
-  }
-  while (k.beepersInBag()){
-  k.putBeeper();
-}
-  left(k);
- 
-  while (k.frontIsClear()) {
-    k.move();
-  }
-  while (k.beepersPresent()) {
-    k.pickBeeper();
-  }
- turnaround(k);
- 
-  while (k.frontIsClear()) {
-    k.move();
-  }
- while (k.beepersInBag()){
-   k.putBeeper();
- }
-}
-
-function left(k){
-  k.turnLeft();
-  k.move();
-  k.turnLeft();
-}
-function turnaround(k){
-  k.turnLeft();
-  k.turnLeft();
-}
- problem(k);
- turnaround(k);
- problem(k);
- turnaround(k);
- problem(k);
- turnaround(k);
- final(k);
+  
 }
   return main;
 }
@@ -116,7 +40,108 @@ function turnaround(k){
 function problem_4() {
 function main(k) {
   
+  function leftthrice(k) {
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+  }
+  function forward(k) {
+    k.move();
+    k.move();
+  }
+  
+  function rightwall(k){
+  k.turnLeft();
+  forward(k);
+  k.turnLeft();
+  }
+  
+  function leftwall(k) {
+    leftthrice(k);
+    forward(k);
+    leftthrice(k);
+  }
+  
+  k.turnLeft();
+  
+  while (k.frontIsClear()) {
+    k.move();
+  }
+  while (k.frontIsBlocked()) {
+  leftthrice(k);
+}
+  k.move();
+  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  rightwall(k);
+  k.move();
+  k.move();
+
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  k.move();
+  leftwall(k);
+  forward(k);
+  k.move();
+  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  forward(k);
+  rightwall(k);
+  forward(k);
+  forward(k);
+  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  forward(k);
+  k.move();
+  leftwall(k);
+  forward(k);
+  k.move();
+  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  forward(k);
+  rightwall(k);
+  forward(k)
+  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  k.move();
+  leftwall(k);
+  k.move();
+  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    k.move();
+  }
+  
+  k.turnLeft();
+  k.move();
+  k.turnLeft();
+  
+  while (k.frontIsClear()) {
+    k.move();
+  }
 }
   return main;
 }
-
