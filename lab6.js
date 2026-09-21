@@ -57,10 +57,14 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_3() {
 function main(k) {
-  k.move();
-  if (k.beepersPresent()){
-    
+ if (k.noBeepersPresent()) {    
+    k.paintCorner("Red");
   }
+  else {
+    k.paintCorner("Blue");
+  }
+  k.move(); 
+  
 }
   return main;
 }
@@ -74,3 +78,4 @@ function main(k) {
 }
   return main;
 }
+
