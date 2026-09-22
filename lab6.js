@@ -109,8 +109,63 @@ function turn(k) {
 // ──────────────────────────────────────────────────────────
 function problem_4() {
 function main(k) {
-  
+
+ function right(k) {
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+ }
+
+ function work(k) {
+
+   if (k.noBeepersPresent()) {
+
+     if (k.cornerColorIs("Red")) {
+        k.putBeeper();
+        k.putBeeper();
+        k.putBeeper();
+        k.putBeeper();
+     }
+     else if (k.cornerColorIs("Green")) {
+       k.putBeeper();
+       k.putBeeper();
+     }
+     else if (k.cornerColorIs("Blue")) {
+       k.putBeeper();
+     }
+
+   }
+ }
+
+ function move(k) {
+  work(k);
+   while (k.frontIsClear()) {
+      k.move();
+      work(k);
+   }
+ }
+
+ function row(k) {
+
+   if (k.facingEast()) {
+      k.turnLeft();
+      k.move();
+      k.turnLeft();
+   }
+   else {
+      right(k);
+      k.move();
+      right(k);
+   }
+ }
+
+ for (let i = 0; i < 3; i++) {
+   move(k);
+   row(k);
+ }
+
+ move(k);
+
 }
   return main;
 }
-
