@@ -57,13 +57,48 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_3() {
 function main(k) {
+function turn(k) {
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+  }
+  
+  function problem(k) {
+   
  if (k.noBeepersPresent()) {    
     k.paintCorner("Red");
   }
-  else {
+  else if (k.beepersPresent()){
     k.paintCorner("Blue");
   }
-  k.move(); 
+ }
+ 
+ function move(k){
+ problem(k);
+ while (k.frontIsClear()){
+   k.move();
+   problem(k);
+ }
+ }
+ 
+ function next(k){
+   if (k.facingEast()){
+     k.turnLeft();
+     k.move();
+     k.turnLeft();
+   } else {
+     turn(k);
+     k.move();
+     turn(k);
+   }
+ 
+ 
+ }
+ for (let i = 0; i < 3; i++){
+ move(k);
+ next(k);
+ } 
+ move(k);
   
 }
   return main;
