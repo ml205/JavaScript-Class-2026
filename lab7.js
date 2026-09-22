@@ -93,11 +93,20 @@ function turnAround(k) {
 }
 
 function paintN(k, c, n) {
-  
+  for (let i = 0; i < n; i++){
+    k.paintCorner(c);
+    k.move();
+  }
 }
 
 function main(k) {
-  
+ paintN(k,"Red",4);
+ k.turnLeft();
+ paintN(k,"Blue",3);
+ k.turnLeft();
+ paintN(k,"Green",4);
+ k.turnLeft();
+ paintN(k,"Yellow",3)
 }
   return main;
 }
