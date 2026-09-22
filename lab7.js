@@ -9,14 +9,11 @@
 // ──────────────────────────────────────────────────────────
 function problem_1() {
 function moveN(k, n) {
-  for (let i = 0; i < n; i++)
-  k.move();
+  
 }
 
 function main(k) {
-  moveN (k, 4);
-  k.turnLeft();
-  moveN (k, 3);
+  
 }
   return main;
 }
@@ -26,53 +23,22 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_2() {
 function turnRight(k) {
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 3; i++) {
     k.turnLeft();
   }
 }
 
-function turn(k) {
+function turnAround(k) {
   k.turnLeft();
   k.turnLeft();
 }
 
-function moveN (k, n){
-  for (let i = 0; i < n; i++){
-  k.move();
-}
-} 
-
-function drawBar(k, h) {
-  k.turnLeft();
-  for (let i = 0; i < h ; i++){
-  k.putBeeper();
-  if (i < h - 1) {
-  k.move();
-}
-}
-turn(k);
-moveN(k, h - 1);
-turnRight(k);
-
-}
-
-function column(k) {
-  k.turnLeft();
-  moveN(k,1);
-  turnRight(k);
+function drawBar(k, height) {
+  
 }
 
 function main(k) {
-  drawBar(k,2);
-  column(k);
-  drawBar(k,4);
-  column(k);
-  drawBar(k,3);
-  column(k);
-  drawBar(k,1);
-  column(k);
-  drawBar(k,5);
- 
+  
 }
   return main;
 }
@@ -93,20 +59,11 @@ function turnAround(k) {
 }
 
 function paintN(k, c, n) {
-  for (let i = 0; i < n; i++){
-    k.paintCorner(c);
-    k.move();
-  }
+  
 }
 
 function main(k) {
- paintN(k,"Red",4);
- k.turnLeft();
- paintN(k,"Blue",3);
- k.turnLeft();
- paintN(k,"Green",4);
- k.turnLeft();
- paintN(k,"Yellow",3)
+  
 }
   return main;
 }
@@ -125,9 +82,49 @@ function turnAround(k) {
   k.turnLeft();
   k.turnLeft();
 }
+function moveN(k, n) {
+  for (let i = 0; i < n; i++) {
+    k.move();
+  }
+}
+
+  function drawBar(k, height) {
+  for (let i = 0; i < height - 1; i++) {
+    k.putBeeper();
+    k.move();
+  }
+  k.putBeeper();
+  turnAround(k);
+  moveN(k, height - 1);
+  turnAround(k);
+}
+
+function nextColumn(k) {
+  turnRight(k);
+  k.move();
+  k.turnLeft();
+}
+
 
 function main(k) {
-  
+  k.turnLeft();
+  for (let i = 0; i < 4; i++) {
+    drawBar(k, i + 1);
+    nextColumn(k);
+  }
+  for (let i = 3; i >= 1; i--) {
+
+  drawBar(k, i);
+
+  if (i > 1) {
+
+  nextColumn(k);
+}
+}
+nextColumn(k);
+k.turnLeft();
+k.turnLeft();
+moveN(k,7);
 }
   return main;
 }
