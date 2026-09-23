@@ -9,11 +9,14 @@
 // ──────────────────────────────────────────────────────────
 function problem_1() {
 function moveN(k, n) {
-  
+  for (let i = 0; i < n; i++)
+  k.move();
 }
 
 function main(k) {
-  
+  moveN (k, 4);
+  k.turnLeft();
+  moveN (k, 3);
 }
   return main;
 }
@@ -23,22 +26,53 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_2() {
 function turnRight(k) {
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     k.turnLeft();
   }
 }
 
-function turnAround(k) {
+function turn(k) {
   k.turnLeft();
   k.turnLeft();
 }
 
-function drawBar(k, height) {
-  
+function moveN (k, n){
+  for (let i = 0; i < n; i++){
+  k.move();
+}
+} 
+
+function drawBar(k, h) {
+  k.turnLeft();
+  for (let i = 0; i < h ; i++){
+  k.putBeeper();
+  if (i < h - 1) {
+  k.move();
+}
+}
+turn(k);
+moveN(k, h - 1);
+turnRight(k);
+
+}
+
+function column(k) {
+  k.turnLeft();
+  moveN(k,1);
+  turnRight(k);
 }
 
 function main(k) {
-  
+  drawBar(k,2);
+  column(k);
+  drawBar(k,4);
+  column(k);
+  drawBar(k,3);
+  column(k);
+  drawBar(k,1);
+  column(k);
+  drawBar(k,5);
+ 
 }
   return main;
 }
@@ -59,11 +93,20 @@ function turnAround(k) {
 }
 
 function paintN(k, c, n) {
-  
+  for (let i = 0; i < n; i++){
+    k.paintCorner(c);
+    k.move();
+  }
 }
 
 function main(k) {
-  
+ paintN(k,"Red",4);
+ k.turnLeft();
+ paintN(k,"Blue",3);
+ k.turnLeft();
+ paintN(k,"Green",4);
+ k.turnLeft();
+ paintN(k,"Yellow",3)
 }
   return main;
 }
@@ -124,7 +167,10 @@ function main(k) {
 nextColumn(k);
 k.turnLeft();
 k.turnLeft();
+turnAround(k);
+k.turnLeft();
 moveN(k,7);
+turnAround(k);
 }
   return main;
 }
