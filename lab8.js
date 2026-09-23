@@ -63,6 +63,9 @@ function main(k) {
 }
 left(k);
 moveN(k,4);
+while (k.beepersInBag()){
+  k.putBeeper();
+}
 up(k);
 right(k);
 }
