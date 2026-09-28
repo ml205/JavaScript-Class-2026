@@ -195,8 +195,96 @@ if (k.cornerColorIs("Red")) {
 // Problem 4: hard (Hard)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
+function right(k) {
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+}
+
+function turnaround(k) {
+    k.turnLeft();
+    k.turnLeft();
+}
+
 function main(k) {
-  
+    let rowNumber = 1;
+    let bestRow = 1;
+    let mostBeepers = 0;
+    let checkingRows = true;
+
+    // Check every row
+    while (checkingRows) {
+        let rowCount = 0;
+
+        if (k.beepersPresent()) {
+            rowCount++;
+        }
+
+        while (k.frontIsClear()) {
+            k.move();
+
+            if (k.beepersPresent()) {
+                rowCount++;
+            }
+        }
+
+        if (rowCount > mostBeepers) {
+            mostBeepers = rowCount;
+            bestRow = rowNumber;
+        }
+
+        // Return to west wall
+        turnaround(k);
+
+        while (k.frontIsClear()) {
+            k.move();
+        }
+
+        // Move to next row
+        right(k);
+
+        if (k.frontIsClear()) {
+            k.move();
+            right(k);
+            rowNumber++;
+        } else {
+            checkingRows = false;
+        }
+    }
+
+    turnaround(k);
+
+    while (rowNumber > bestRow) {
+        k.move();
+        rowNumber = rowNumber - 1;
+    }
+
+    k.turnLeft();
+
+    let collected = 0;
+
+    if (k.beepersPresent()) {
+        k.pickBeeper();
+        collected++;
+    }
+
+    while (k.frontIsClear()) {
+        k.move();
+
+        if (k.beepersPresent()) {
+            k.pickBeeper();
+            collected++;
+        }
+    }
+    turnaround(k);
+
+    while (k.frontIsClear()) {
+        k.move();
+    }
+
+    for (let i = 0; i < collected; i++) {
+        k.putBeeper();
+    }
 }
   return main;
 }
