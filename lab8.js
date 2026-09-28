@@ -92,8 +92,101 @@ for (let i = 0; i < count; i++) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
+function right(k) {
+ k.turnLeft();
+ k.turnLeft();
+ k.turnLeft();
+}
+
+function turnAround(k) {
+ k.turnLeft();
+ k.turnLeft();
+}
+
 function main(k) {
-  
+let checkingRows = true;
+while (checkingRows) {
+
+ let redCount = 0;
+ let greenCount = 0;
+
+if (k.cornerColorIs("Red")) {
+ redCount++;
+ } else if (k.cornerColorIs("Green")) {
+ greenCount++;
+ }
+
+ while (k.frontIsClear()) {
+  k.move();
+ if (k.cornerColorIs("Red")) {
+ redCount++;
+ }
+ else if (k.cornerColorIs("Green")) {
+ greenCount++;
+  }
+  }
+        
+ turnAround(k);
+ while (k.frontIsClear()) {
+
+ if (redCount > greenCount) {
+
+ if (k.cornerColorIs("Red")) {
+ } else if (k.cornerColorIs("Green")) {
+ } else {
+ k.paintCorner("Red");
+ }
+
+ } else if (greenCount > redCount) {
+
+ if (k.cornerColorIs("Red")) {
+ } else if (k.cornerColorIs("Green")) {
+ } else {
+ k.paintCorner("Green");
+ }
+ } else {
+
+ if (k.cornerColorIs("Red")) {
+ } else if (k.cornerColorIs("Green")) {
+ } else {
+ k.paintCorner("Yellow");
+ }
+ }
+ k.move();
+ }
+ if (redCount > greenCount) {
+
+ if (k.cornerColorIs("Red")) {
+ } else if (k.cornerColorIs("Green")) { 
+   
+ } else {
+ k.paintCorner("Red");
+ }
+
+ } else if (greenCount > redCount) {
+ if (k.cornerColorIs("Red")) {
+ } else if (k.cornerColorIs("Green")) {
+ } else {
+ k.paintCorner("Green");
+ }
+
+ } else {
+ if (k.cornerColorIs("Red")) {
+ } else if (k.cornerColorIs("Green")) {
+ } else {
+ k.paintCorner("Yellow");
+ }
+
+ }
+ turnAround(k);    
+ k.turnLeft();   
+ if (k.frontIsClear()) {
+  k.move();     
+  right(k);    
+ } else {
+  checkingRows = false;
+   }
+ }
 }
   return main;
 }
