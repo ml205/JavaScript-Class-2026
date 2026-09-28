@@ -9,7 +9,7 @@
 // ──────────────────────────────────────────────────────────
 function problem_1() {
 function main(k) {
-  let steps = 0; 
+   let steps = 0; 
   k.putBeeper();               
   while (k.frontIsClear()) {
     k.move();
@@ -23,7 +23,7 @@ function main(k) {
     steps = steps + 1;         
   }
   for (let i = 0; i < steps; i++) {
-  }
+}
 }
   return main;
 }
@@ -32,43 +32,58 @@ function main(k) {
 // Problem 2: moderate (Medium)
 // ──────────────────────────────────────────────────────────
 function problem_2() {
-function left(k){
-  k.turnLeft();
-  k.turnLeft();
-}
-function moveN(k, n){
-  for (i = 0; i < n; i++){
-    k.move();
-  }
-}
-
-function up(k){
-  left(k);
-  k.turnLeft();
-  k.move();
-}
-
 function right(k) {
-  left(k);
-  k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
 }
+
+function turn(k) {
+    k.turnLeft();
+    k.turnLeft();
+}
+
 function main(k) {
-  let collected = 0;
-  while (collected < 3){
-  while (k.frontIsClear()){
-    k.move()
+
+let done = false;
+
+while (!done) {
+let count = 0;
+
+while (k.frontIsClear()) {
+
+ while (k.beepersPresent()) {
+  k.pickBeeper();
+  count++;
+    }
+k.move();
+    }
+
   while (k.beepersPresent()) {
-    k.pickBeeper();
+  k.pickBeeper();
+  count++;
   }
-}
-left(k);
-moveN(k,4);
-while (k.beepersInBag()){
+
+  turn(k);
+
+  while (k.frontIsClear()) {
+   k.move();
+  }
+
+for (let i = 0; i < count; i++) {
   k.putBeeper();
-}
-up(k);
-right(k);
-}
+  }
+
+ turn(k);
+ k.turnLeft();
+
+ if (k.frontIsClear()) {
+  k.move();
+  right(k);
+  } else {
+   done = true;
+  }
+ }
 }
   return main;
 }
