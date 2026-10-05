@@ -1,0 +1,75 @@
+1st question 
+
+function turnleft(k){
+  k.turnLeft();
+  k.turnLeft();
+  }
+function turnright(k){
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+  }
+  
+  function row(k){
+    if (k.cornerColorIs("Red")){
+      k.paintCorner("Yellow")
+      }
+    if (k.beepersPresent()){
+      k.pickBeeper();
+      }
+     if (k.frontIsClear()){
+       k.move();
+       }
+    }
+  
+  function move(k){
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    k.turnLeft();
+    k.move();
+    k.turnLeft();
+    }
+    
+    function moveb(k){
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    turnright(k)
+    k.move();
+    turnright(k)
+    }
+    
+    function movec(k){
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    row(k)
+    if (k.beepersInBag()){
+      k.putBeeper();
+      }
+    }
+function main(k) {
+  move(k)
+  moveb(k)
+  move(k)
+  moveb(k)
+  move(k)
+  moveb(k)
+  move(k)
+  movec(k)
+}
