@@ -87,45 +87,73 @@ function problem_4() {
 function main(k) {
   let plan = "RGBYC";
 
-  // Build the reversed string with a loop
   let reversed = "";
   for (let i = plan.length - 1; i >= 0; i--) {
     reversed += plan[i];
   }
-
-  // Rotate left by one using slice
   let rotated = plan.slice(1) + plan[0];
 
-  // Bottom row
-  paintRow(k, plan);
+  drawRow(k, plan);
 
-  // Row 2
-  goToStartOfNextRow(k);
-  paintRow(k, reversed);
-
-  // Row 3
-  goToStartOfNextRow(k);
-  paintRow(k, rotated);
-}
-
-function paintRow(k, colors) {
-  for (let i = 0; i < colors.length; i++) {
-    k.paintCorner(colors[i]);
-
-    if (i < colors.length - 1) {
-      k.move();
-    }
-  }
-}
-
-function goToStartOfNextRow(k) {
-  k.turnAround();
+  k.turnLeft();
+  k.turnLeft();
 
   for (let i = 0; i < 4; i++) {
     k.move();
   }
 
-  k.turnRight();
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
   k.move();
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+
+  drawRow(k, reversed);
+
+  k.turnLeft();
+  k.turnLeft();
+
+  for (let i = 0; i < 4; i++) {
+    k.move();
+  }
+
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+  k.move();
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+
+  drawRow(k, rotated);
+
+  k.turnLeft();
+}
+
+function drawRow(k, plan) {
+  for (let i = 0; i < plan.length; i++) {
+    let color = "";
+
+    if (plan[i] === "R") {
+      color = "Red";
+    } else if (plan[i] === "G") {
+      color = "Green";
+    } else if (plan[i] === "B") {
+      color = "Blue";
+    } else if (plan[i] === "Y") {
+      color = "Yellow";
+    } else if (plan[i] === "C") {
+      color = "Cyan";
+    }
+
+    k.paintCorner(color);
+
+    if (i < plan.length - 1) {
+      k.move();
+    }
+  }
+}
   return main;
 }
