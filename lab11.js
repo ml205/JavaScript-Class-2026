@@ -147,7 +147,6 @@ function main(k) {
 
     for (let street = 1; street <= 6; street++) {
 
-        // Fill the current row
         for (let avenue = 1; avenue <= 7; avenue++) {
 
             let beepers = (avenue * street) % 5;
@@ -161,23 +160,19 @@ function main(k) {
             }
         }
 
-        // Last row is done
         if (street == 6) {
             break;
         }
 
-        // Return to avenue 1
         turnAround(k);
 
         while (k.frontIsClear()) {
             k.move();
         }
 
-        // Move up one street
         turnRight(k);
         k.move();
 
-        // Face east again
         turnRight(k);
     }
 }
