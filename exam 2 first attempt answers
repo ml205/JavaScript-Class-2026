@@ -1,0 +1,133 @@
+// The letter code: a pile of n beepers stands for LETTERS[n].
+// Slot 0 is a space and is never used, so "A" is 1, "B" is 2, … "Z" is 26.
+const LETTERS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+// The swap list: a word found on the left is replaced by its partner on the right.
+const SWAP = {
+  HOT: "COLD",  UP: "DOWN",   YES: "NO",   FAST: "SLOW",
+  I: "YOU",     GOOD: "BAD",  ON: "OFF",   WET: "DRY",
+  BIG: "TINY",  CAT: "DOG",   SUN: "MOON", NEW: "OLD",
+};
+
+function main(k) {
+let word = "";
+let reverseword = "";
+
+k.move();
+
+while (k.beepersPresent()) {
+let count = 0;
+
+while (k.beepersPresent()) {
+k.pickBeeper();
+count++;
+}
+
+if (count == 1) {
+word = word + "A";
+}
+
+if (count == 2) {
+word = word + "B";
+}
+
+if (count == 3) {
+word = word + "C";
+}
+
+k.move();
+}
+
+if (word == "HOT") {
+newWord = "COLD";
+}
+
+if (word == "YES") {
+newWord = "NO";
+}
+
+if (word == "BIG") {
+newWord = "TINY";
+}
+
+k.turnLeft();
+k.turnLeft();
+
+while (k.frontIsClear()) {
+k.move();
+}
+
+k.turnLeft();
+k.turnLeft();
+
+for (let i = 0; i < 6; i++) {
+k.move();
+}
+
+for (let i = 0; i < reverseword.length; i++) {
+k.putBeeper();
+k.move();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// The colors that appear in these worlds.
+const COLORS = ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Magenta", "Pink"];
+
+function main(k) {
+let color = "";
+k.move();
+
+ if (k.cornerColorIs("Red")) {
+        color = "Blue";
+        
+if (k.cornerColorIs("Blue")) {
+color = "Red";
+}
+
+k.turnLeft();
+k.move();
+k.turnLeft();
+
+for (let i = 0; i < 5; i++) {
+if (k.cornerColorIs("Red")) {
+k.paintCorner("Blue");
+}
+if (k.cornerColorIs("Blue")) {
+k.paintCorner("Red");
+}
+k.move();
+ }
+ k.turnLeft();
+ k.move();
+ k.turnLeft();
+ k.turnLeft();
+ k.move();
+ k.turnLeft();
+
+for (let i = 0; i < 8; i++) {
+if (k.cornerColorIs("Green")) {
+k.paintCorner("Yellow");
+}
+k.move();
+}
+
+k.turnLeft();
+k.move();
+k.turnLeft();
+
+while (k.frontIsClear()) {
+k.move();
+   }
+ }
+}
