@@ -1,0 +1,183 @@
+// The letter code: a pile of n beepers stands for LETTERS[n].
+// Slot 0 is a space and is never used, so "A" is 1, "B" is 2, … "Z" is 26.
+const LETTERS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+// The swap list: a word found on the left is replaced by its partner on the right.
+const SWAP = {
+  HOT: "COLD",  UP: "DOWN",   YES: "NO",   FAST: "SLOW",
+  I: "YOU",     GOOD: "BAD",  ON: "OFF",   WET: "DRY",
+  BIG: "TINY",  CAT: "DOG",   SUN: "MOON", NEW: "OLD",
+};
+
+function main(k) {
+let word = "";
+
+ k.move();
+    
+for (let i = 0; i < 3; i++) {
+        let number = 0;
+
+ while (k.beepersPresent()) {
+            k.pickBeeper();
+            number++;
+        }
+
+ word = word + LETTERS[number];
+
+   if (i < 2) {
+      k.move();
+        }
+    }
+    
+ let answer = SWAP[word];
+
+ if (answer == undefined) {
+        return;
+    }
+
+    k.turnLeft();
+    k.turnLeft();
+
+    while (k.frontIsClear()) {
+        k.move();
+    }
+
+    k.turnLeft();
+    k.turnLeft();
+
+  for (let i = 0; i < 6; i++) {
+        k.move();
+    }
+
+ for (let i = 0; i < answer.length; i++) {
+        let number = LETTERS.indexOf(answer[i]);
+
+        for (let j = 0; j < number; j++) {
+            k.putBeeper();
+        }
+
+        if (i < answer.length - 1) {
+            k.move();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// The colors that appear in these worlds.
+const COLORS = ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Magenta", "Pink"];
+
+function turnRight(k) {
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+}
+
+function readColor(k) {
+    for (let i = 0; i < COLORS.length; i++) {
+        if (k.cornerColorIs(COLORS[i])) {
+            return COLORS[i];
+        }
+    }
+    return "";
+}
+
+function main(k) {
+
+    k.move();
+    let oldColor = readColor(k);
+
+    k.move();
+    let newColor = readColor(k);
+
+    k.turnLeft();
+    k.turnLeft();
+
+    while (k.frontIsClear()) {
+        k.move();
+    }
+
+    turnRight(k);
+    k.move();
+    turnRight(k);
+
+    for (let i = 0; i < 7; i++) {
+
+        for (let j = 0; j < 11; j++) {
+
+            if (k.cornerColorIs(oldColor)) {
+                k.paintCorner(newColor);
+            }
+
+            if (j < 10) {
+                k.move();
+            }
+        }
+
+        if (i < 6) {
+            if (k.facingEast()) {
+                k.turnLeft();
+                k.move();
+                k.turnLeft();
+            } else {
+                turnRight(k);
+                k.move();
+                turnRight(k);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Helper: turns a CSS width like "12px" into the number 12.
+function parseWidth(borderWidth) {
+  return parseFloat(borderWidth);
+}
+const divs = document.querySelectorAll("#boxes div");
+
+let thickest = 0;
+
+for (let div of divs) {
+  let width = parseWidth(getComputedStyle(div).borderWidth);
+
+  if (width > thickest) {
+    thickest = width;
+  }
+}
+
+for (let div of divs) {
+  div.style.borderWidth = thickest + "px";
+}
+// Get references to the five divs, find the one with the thickest border,
+// then give every other div that same border width.
+
+
+
