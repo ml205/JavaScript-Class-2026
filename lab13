@@ -1,0 +1,275 @@
+// Karel submission — do not remove the header or the function wrappers.
+// assignment: lesson-13
+//
+// Each problem below is wrapped in an outer function that returns its
+// main(k), so your instructor's grader can run and grade every one.
+
+// ──────────────────────────────────────────────────────────
+// Problem 1: simple (Simple)
+// ──────────────────────────────────────────────────────────
+function problem_1() {
+function main(k) {
+  let heights = [2, 4, 1, 3, 2];
+  let colors = ["Red", "Orange", "Yellow", "Green", "Blue"];
+  for (let i = 0; i < heights.length; i++) {
+    k.turnLeft();
+
+    for (let j = 0; j < heights[i]; j++) {
+      k.paintCorner(colors[i]);
+
+      if (j < heights[i] - 1) {
+        k.move();
+      }
+    }
+
+    k.turnLeft();
+    k.turnLeft();
+
+    for (let j = 0; j < heights[i] - 1; j++) {
+      k.move();
+    }
+
+    k.turnLeft();
+
+    if (i < heights.length - 1) {
+      k.move();
+    }
+  }
+}
+  return main;
+}
+
+// ──────────────────────────────────────────────────────────
+// Problem 2: moderate (Moderate)
+// ──────────────────────────────────────────────────────────
+function problem_2() {
+function main(k) {
+   let totals = new Array(5).fill(0);
+
+  for (let street = 0; street < 5; street++) {
+
+    for (let c = 0; c < 5; c++) {
+      while (k.beepersPresent()) {
+        k.pickBeeper();
+        totals[c]++;
+      }
+
+      if (c < 4) {
+        k.move();
+      }
+    }
+
+    if (street < 4) {
+      k.turnLeft();
+      k.turnLeft();
+
+      for (let i = 0; i < 4; i++) {
+        k.move();
+      }
+
+      k.turnLeft();
+      k.turnLeft();
+      k.turnLeft();
+      k.move();
+
+      k.turnLeft();
+      k.turnLeft();
+      k.turnLeft();
+    }
+  }
+
+  k.turnLeft();
+  k.turnLeft();
+
+  for (let i = 0; i < 4; i++) {
+    k.move();
+  }
+
+  k.turnLeft();
+  k.move();
+  k.move();
+  k.move();
+  k.move();
+
+  k.turnLeft();
+
+  for (let c = 0; c < 5; c++) {
+    for (let j = 0; j < totals[c]; j++) {
+      k.putBeeper();
+    }
+
+    if (c < 4) {
+      k.move();
+    }
+  }
+}
+  return main;
+}
+
+// ──────────────────────────────────────────────────────────
+// Problem 3: complex (Complex)
+// ──────────────────────────────────────────────────────────
+function problem_3() {
+function main(k) {
+  let piles = [];
+
+  while (true) {
+
+    while (k.beepersPresent()) {
+      let count = 0;
+
+      while (k.beepersPresent()) {
+        k.pickBeeper();
+        count++;
+      }
+
+      piles.push(count);
+
+      if (k.frontIsClear()) {
+        k.move();
+      } else {
+        break;
+      }
+    }
+
+    while (k.frontIsClear()) {
+      k.move();
+    }
+
+    k.turnLeft();
+    k.turnLeft();
+
+    while (piles.length > 0) {
+      let count = piles.pop();
+
+      for (let i = 0; i < count; i++) {
+        k.putBeeper();
+      }
+
+      if (k.frontIsClear()) {
+        k.move();
+      }
+    }
+
+    while (k.frontIsClear()) {
+      k.move();
+    }
+
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+
+    if (!k.frontIsClear()) {
+      break;
+    }
+
+    k.move();
+
+    k.turnLeft();
+    k.turnLeft();
+    k.turnLeft();
+  }
+}
+  return main;
+}
+
+// ──────────────────────────────────────────────────────────
+// Problem 4: complex2 (Complex II)
+// ──────────────────────────────────────────────────────────
+function problem_4() {
+function main(k) {
+ let n = 1;
+
+  while (k.frontIsClear()) {
+    k.move();
+    n++;
+  }
+
+  k.turnLeft();
+  k.turnLeft();
+
+  for (let i = 1; i < n; i++) {
+    k.move();
+  }
+
+  k.turnLeft();
+  k.turnLeft();
+
+  let grid = [];
+
+  for (let r = 0; r < n; r++) {
+    grid[r] = [];
+
+    for (let c = 0; c < n; c++) {
+      let count = 0;
+
+      while (k.beepersPresent()) {
+        k.pickBeeper();
+        count++;
+      }
+
+      grid[r][c] = count;
+
+      if (c < n - 1) {
+        k.move();
+      }
+    }
+
+    if (r < n - 1) {
+      k.turnLeft();
+      k.move();
+      k.turnLeft();
+
+      for (let i = 1; i < n; i++) {
+        k.move();
+      }
+
+      k.turnLeft();
+      k.turnLeft();
+    }
+  }
+
+  k.turnLeft();
+  k.turnLeft();
+
+  for (let i = 1; i < n; i++) {
+    k.move();
+  }
+
+  k.turnLeft();
+
+  for (let i = 1; i < n; i++) {
+    k.move();
+  }
+
+  k.turnLeft();
+
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < n; c++) {
+      let count = grid[c][n - 1 - r];
+
+      for (let j = 0; j < count; j++) {
+        k.putBeeper();
+      }
+
+      if (c < n - 1) {
+        k.move();
+      }
+    }
+
+    if (r < n - 1) {
+      k.turnLeft();
+      k.move();
+      k.turnLeft();
+
+      for (let i = 1; i < n; i++) {
+        k.move();
+      }
+
+      k.turnLeft();
+      k.turnLeft();
+    }
+  }
+}
+  return main;
+}
